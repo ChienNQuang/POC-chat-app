@@ -18,9 +18,8 @@ const ChatListItem = ({ id, member }) => {
 				cursor: 'pointer',
 			}}
 		>
-			<img src={member.photoURL} alt='avatar' height={40} style={{ borderRadius: '50%' }} />
 			<span style={{ textOverflow: 'ellipsis', maxWidth: '100%' }}>
-				{member.displayName.toUpperCase()}
+				{member.email.toUpperCase()}
 			</span>
 		</div>
 	);

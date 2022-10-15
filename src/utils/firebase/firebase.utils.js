@@ -33,8 +33,8 @@ export const googlePopup = async () => {
 	try {
 		const { user } = await signInWithPopup(auth, googleProvider);
 		const userRef = doc(db, `/users/${user.uid}`);
-		const { uid, email, displayName, photoURL } = user;
-		await setDoc(userRef, { uid, email, displayName, photoURL });
+		const { uid, email} = user;
+		await setDoc(userRef, { uid, email });
 	} catch (e) {
 		console.log(e);
 	}
@@ -72,11 +72,11 @@ export const createNewChat = async (current, otherUid) => {
 	const other = await findUser(otherUid);
 	if (!current || !other) return;
 	try {
-		const { uid, photoURL, displayName, email } = current;
+		const { uid, email } = current;
 		const chatRef = collection(db, `/chats`);
 		await addDoc(chatRef, {
 			membersId: [current.uid, other.uid],
-			members: [{ uid, photoURL, displayName, email }, other],
+			members: [{ uid, email }, other],
 		});
 	} catch (e) {
 		console.log(e);
